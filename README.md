@@ -3,6 +3,7 @@
 
 # Example usage hiera,
 
+```
 ---
 classes:
   - kesl
@@ -26,10 +27,10 @@ kesl::customimports:
         'SambaConfigPath': '/test'
         'NfsExportPath': '/test'
  
-
+```
 
 # Example of custom import settings,
-
+```
      AppSettings:
          SambaConfigPath: /etc/samba/smb.conf
          NfsExportPath: /etc/exports
@@ -460,8 +461,8 @@ kesl::customimports:
      BackupTask.Settings:
          DaysToLive: 90
          BackupSizeLimit: 0
-         BackupFolder: /var/opt/kaspersky/kesl/common/objects-backup/
-
+         BackupFolder: /var/opt/kaspersky/kesl/common/objects-backup
+```
 
 
 
