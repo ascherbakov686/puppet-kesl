@@ -26,10 +26,76 @@ kesl::customimports:
      AppSettings:
         'SambaConfigPath': '/test'
         'NfsExportPath': '/test'
+
+kesl::customtaskimports:
+ '1':
+    Task:
+       'ScanArchived': 'No'
+       'ScanSfxArchived': 'No'
+       'ScanMailBases': 'No'
+       'ScanPlainMail': 'No'
+       'TimeLimit': '60'
+       'SizeLimit': '0'
+       'FirstAction': 'Recommended'
+       'SecondAction': 'Block'
+       'UseExcludeMasks': 'No'
+       'UseExcludeThreats': 'No'
+       'ReportCleanObjects': 'No'
+       'ReportPackedObjects': 'No'
+       'ReportUnprocessedObjects': 'No'
+       'UseAnalyzer': 'Yes'
+       'HeuristicLevel': 'Recommended'
+       'UseIChecker': 'Yes'
+       'ScanByAccessType': 'SmartCheck'
+    ScanScope.item_0000:
+       'AreaDesc': 'All objects'
+       'UseScanArea': 'Yes'
+       'Path': '/'
+       'AreaMask.item_0000': '*'
+    ExcludedFromScanScope.item_0000:
+       'AreaDesc': ''
+       'UseScanArea': 'Yes'
+       'Path': '/'
+       'AreaMask.item_0000': '*'
  
 ```
 
-#### Example of custom import settings,
+#### Examples of custom task import( kesl-control --set-settings 1 --file /tmp/settings-task.ini.1 ) settings
+```
+ScanArchived=No
+ScanSfxArchived=No
+ScanMailBases=No
+ScanPlainMail=No
+TimeLimit=60
+SizeLimit=0
+FirstAction=Recommended
+SecondAction=Block
+UseExcludeMasks=No
+UseExcludeThreats=No
+ReportCleanObjects=No
+ReportPackedObjects=No
+ReportUnprocessedObjects=No
+UseAnalyzer=Yes
+HeuristicLevel=Recommended
+UseIChecker=Yes
+ScanByAccessType=SmartCheck
+
+[ScanScope.item_0000]
+AreaDesc=All objects
+UseScanArea=Yes
+Path=/
+AreaMask.item_0000=*
+
+[ExcludedFromScanScope.item_0000]
+AreaDesc=
+UseScanArea=Yes
+Path=/
+AreaMask.item_0000=*
+
+```
+
+
+#### Example of custom global import settings,
 ```
      AppSettings:
          SambaConfigPath: /etc/samba/smb.conf
