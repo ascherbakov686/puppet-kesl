@@ -1,0 +1,9 @@
+<% @customtaskimports.each do |key, hash| -%>
+<% if key != "Task" %>
+[<%= key %>]
+<% end -%>
+<% hash.each do |key,value| -%>
+<%= key %>=<%= value %>
+<% end -%>
+<% end -%>
+
