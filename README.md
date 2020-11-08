@@ -1,5 +1,5 @@
 
-### Puppet Module for deploy Kaspersky Endpoint Security 11 for Linux
+### Puppet Module for deploy role Kaspersky Endpoint Security 11 for Linux
 
 #### Example usage hiera,
 
