@@ -8,20 +8,33 @@
 classes:
   - kesl
 
-kesl::ensure: '11.1.0-3013'
+kesl::ensure: '11.1.0-3203'
+kesl::ensureagent: '11.0.0-38'
+
 kesl::autoinstall:
      params:
         'EULA_AGREED': 'Yes'
         'PRIVACY_POLICY_AGREED': 'Yes'
         'USE_KSN': 'No'
-        'UPDATE_SOURCE': 'KLServers'
-        'UPDATE_EXECUTE': 'No'
+        #'UPDATE_SOURCE': 'KLServers'
+        'UPDATER_SOURCE': 'SCServer'
+        'UPDATE_EXECUTE': 'Yes'
         'KERNEL_SRCS_INSTALL': 'No'
         'USE_GUI': 'No'
         'IMPORT_SETTINGS': 'Yes'
-        'INSTALL_LICENSE': '*****-*****-*****-*****'
+        #'INSTALL_LICENSE': '*****-*****-*****-*****'
+        'ScanMemoryLimit': '2048'
+       
+kesl::autoinstallagent:
+     params:
+        'KLNAGENT_SERVER': 'ksc.domain.ru'
+        'KLNAGENT_PORT': '14000'
+        'KLNAGENT_SSLPORT': '13000'
+        'KLNAGENT_USESSL': 'Yes'
+        'KLNAGENT_GW_MODE': '1'
 
-kesl::customconfigversion: '11.1.0.3013'
+kesl::customconfigversion: "%{lookup('kesl::ensure')}"
+
 kesl::customimports:
      AppSettings:
         'SambaConfigPath': '/test'
