@@ -15,8 +15,9 @@ define tasks::set_settings_task {
          #name     => "${::kesl::customtaskimports[$task]}",
          #}
 
+         if $customtaskimports {
          $customtaskimports = $::kesl::customtaskimports[$task]
-
+         
          file { $taskfilepath:
          ensure  => file,
          owner   => 'root',
@@ -24,8 +25,9 @@ define tasks::set_settings_task {
          mode    => '0644',
          content => template('kesl/kesl_task.ini.erb'),
          notify  => Exec['set_task_settings'] 
-         }
-
+          }
+         }  
+ 
          exec { 'set_task_settings':
            path    =>  ["/usr/bin", "/usr/sbin", "/bin"],
            command => "kesl-control --set-settings ${task} --file ${taskfilepath}"
@@ -51,8 +53,8 @@ class kesl (
   $customconfpath = '/opt/kaspersky/kesl/custom_kesl.ini',
   $autoinstall = $::kesl::autoinstall,
   $autoinstallagent = $::kesl::autoinstallagent,
-  $customimports = $::kesl::customimports,
-  $customtaskimports = $::kesl::customtaskimports,
+  $customimports = hiera('kesl::customimports',undef),
+  $customtaskimports = hiera('kesl::customtaskimports',undef),
   $customconfigversion = '11.1.0.3013',
 
 ) {
@@ -71,6 +73,8 @@ class kesl (
     notify  => Exec['apply_config']
   }
 
+  
+  if $customimports {
   file { $customconfpath:
     ensure  => file,
     owner   => 'root',
@@ -78,6 +82,7 @@ class kesl (
     mode    => '0644',
     content => template('kesl/custom_kesl.ini.erb'),
     notify  => Exec['apply_config']
+   }
   }
 
   exec { 'save_full_config':
@@ -99,8 +104,10 @@ class kesl (
        notify      => Service[$service_name]
   }
 
+  if $customtaskimports {
   $tasks = keys($customtaskimports)
   tasks::set_settings_task { $tasks:; }
+  }
 
   service { $service_name:
     ensure => $service_run,
